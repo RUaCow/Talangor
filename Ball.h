@@ -18,7 +18,7 @@ class Ball
 	//Ball's mass
 	float mass;
 	//Ball's velocity
-	vector2Df velocity;
+	Vector2Df velocity;
 
 	//Added By Elk
 	Vector2Df pos; //Ball's Position
