@@ -1,5 +1,5 @@
 /**************************************************************
-	ball.h
+	Ball.h
 	Author : Arman Maghoul	
 	Purpose : Handling the balls.
 	Date : 8 / 1 / 2012
