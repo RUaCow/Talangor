@@ -1,3 +1,7 @@
+C=g++
+CFLAGS=-O2 -Wall
 all:	Ball.o
 Ball.o:
-	g++ Ball.cpp -c
+	$(C) Ball.cpp -c $(CFLAGS)
+clean:
+	rm -rf *.o
