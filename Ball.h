@@ -21,7 +21,7 @@ class Ball
 	vector2Df velocity;
 
 	//Added By Elk
-	Vector2Df Pos; //Ball's Position
+	Vector2Df pos; //Ball's Position
 public:
 	Ball(int mRadius , float mMass , Vector2Df mPos);
 };
