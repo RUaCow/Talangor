@@ -23,7 +23,8 @@ class Ball
 	//Added By Elk
 	Vector2Df pos; //Ball's Position
 public:
-	Ball(int mRadius , float mMass , Vector2Df mPos);
+	Ball(int mNumber , int mRadius , float mMass , Vector2Df mPos);
+	friend class WorldModel;
 };
 
 #endif //BALL_H

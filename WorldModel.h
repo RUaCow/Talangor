@@ -7,19 +7,22 @@
 #ifndef _WORLDMODEL_H
 #define _WORLDMODEL_H
 #include "Ball.h"
-#include "Map.h"
+#include "Random.h"
+//#include "Map.h"
 #include <vector>
+#include <iostream>
 
 class WorldModel{
-	vector<Ball> balls;
-	Map levelMap;
+	int n;
+	std::vector<Ball> balls;
+	float minDis;
+	//Map levelMap;
 public:
 	//WorldModel();
-	WorldModel(Map mLevelMap = Map());
-	~WorldModel();
+	WorldModel(int = 3 , float = 0.5/* , Map mLevelMap = Map()*/);
+	~WorldModel(){}
 	void speedCalc();
-	void update();	
+	void update();
 };
 
-#endif //_WORLDMODEL
-_
+#endif //_WORLDMODEL_H

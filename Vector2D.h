@@ -2,7 +2,8 @@
 #define VECTOR2D_H
 
 #include <cmath>
-
+#include <iostream>
+using namespace std;
 template <class T>
 
 class Vector2D
@@ -99,7 +100,11 @@ public:
 	//Substraction of two vectors.
 	Vector2D operator -(Vector2D in)
 	{
-		return vector2D(this->x - in.x , this->y - in.y);
+		return Vector2D(this->x - in.x , this->y - in.y);
+	}
+	friend ostream& operator<<(ostream& in , const Vector2D& a){
+		in << a.x << " " << a.y;
+		return in;
 	}
 };//Vector2D class.
 
