@@ -52,7 +52,12 @@ public:
 	{
 		return Vector2D(-y , x);
 	}
-	
+	T& X(){
+		return x;
+	}
+	T& Y(){
+		return y;
+	}
 	//Get x component.
 	T getX(void)
 	{

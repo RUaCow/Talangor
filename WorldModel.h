@@ -16,6 +16,8 @@ class WorldModel{
 	int n;
 	std::vector<Ball> balls;
 	float minDis;
+	float time;
+	float dt;
 	//Map levelMap;
 public:
 	//WorldModel();
