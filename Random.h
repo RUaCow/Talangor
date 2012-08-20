@@ -18,10 +18,10 @@ class Random{
 public:
 	Random(){
 		srand(time(NULL));
-		RandMax = (1 << 20);
+		RandMax = (1 << 2);
 	}
 	float Flat(float min = 0.0 , float max = 1.0){
-		return (min + (max - min) * rand() / RandMax);
+		return (min + (max - min) * rand() / RAND_MAX);
 	}
 	float Gauss(float mean = 0.0 , float sigma = 1.0){
 		float x , y , z;
