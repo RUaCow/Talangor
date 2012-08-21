@@ -11,6 +11,7 @@
 
 class Ball
 {
+	friend class WorldModel;
 	//Ball's identity
 	int number;
 	//Ball's radius
@@ -24,7 +25,6 @@ class Ball
 	Vector2Df pos; //Ball's Position
 public:
 	Ball(int mNumber , int mRadius , float mMass , Vector2Df mPos);
-	friend class WorldModel;
 };
 
 #endif //BALL_H

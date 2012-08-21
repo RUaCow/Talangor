@@ -18,6 +18,10 @@ class WorldModel{
 	float minDis;
 	float time;
 	float dt;
+	//Coefficient of Friction (COF)
+	float COF;
+	//Gravity Acceleration
+	const float G;
 	//Map levelMap;
 public:
 	//WorldModel();

@@ -1,10 +1,11 @@
 #include "WorldModel.h"
 using namespace std;
-WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/){
+WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8){
 	time = 0;
 	dt = 0.02;
 	n = mN;
 	minDis = mMinDis;
+	COF = 0.2f;
 	Random r;
 	for(int i = 0 ; i < n ; i++){
 		bool isGood = false;
@@ -23,7 +24,18 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/){
 	}
 }
 
-void WorldModel::speedCalc(){
+void WorldModel::speedCalc()
+{
+	for(int i = 0 ; i < n ; i++)
+	{
+		float frictionAcceleration = G * COF;
+		float xFactor = balls.at(n).velocity.getNormalizedVector().getX();
+		float yFactor = balls.at(n).velocity.getNormalizedVector().getY();
+
+		Vector2Df frictionAccelerationVector(frictionAcceleration * xFactor , frictionAcceleration * yFactor);
+
+		balls.at(n).velocity -= frictionAccelerationVector * dt;
+	}
 }
 
 void WorldModel::update(){

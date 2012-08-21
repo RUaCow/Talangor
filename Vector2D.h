@@ -107,12 +107,14 @@ public:
 	{
 		return Vector2D(this->x - in.x , this->y - in.y);
 	}
-	friend ostream& operator<<(ostream& in , const Vector2D& a){
-		in << a.x << " " << a.y;
-		return in;
-	}
-};//Vector2D class.
 
+	//-=
+	vector2D operator -=(vector2D in)
+	{
+		*this = *this - in;
+	}
+	friend ostream& operator<<(ostream& in , const Vector2D& a);
+};//Vector2D class.
 
 //Type defines:
 typedef Vector2D<int> Vector2Di;
@@ -123,6 +125,13 @@ typedef Vector2D<float> Vector2Df;
 inline Vector2Df operator*(float scl , Vector2Df in)
 {
 	return Vector2Df(in.getX() * scl , in.getY() * scl);
+}
+
+template <class T>
+ostream& operator<<(ostream& in , const Vector2D& a)
+{
+		in << a.x << " " << a.y;
+		return in;
 }
 
 #endif //VECTOR2D_H
