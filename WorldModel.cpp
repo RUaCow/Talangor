@@ -110,7 +110,17 @@ Vector2Df WorldModel::speedAt(int n , float t)
 	return (balls.at(n).velocity - frictionAccelerationVector * deltaT);
 }
 
-
+void WorldModel::collisionDitection(){
+	for(int i = 0 ; i < balls.size() ; i++)
+		for(int j = 0 ; j < balls.size() ; j++)
+			if(i > j){
+				Vector2Df iNextPos = balls[i].pos + speedAt(i , time + dt) * dt;
+				Vector2Df jNextPos = balls[j].pos + speedAt(j , time + dt) * dt;
+				if((balls[i].pos - balls[j].pos).getLenght() < balls[i].radius + balls[j].radius && 
+						(iNextPos - jNextPos).getLenght() < balls[i].radius + balls[j].radius)
+					calcAfterCollisionVelocity(i , j);
+			}
+}
 void WorldModel::update(){
 	time += dt;
 	speedCalc();
