@@ -1,6 +1,6 @@
 #include "WorldModel.h"
 using namespace std;
-WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8){
+WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8) , maxCord(1.0){
 	time = 0;
 	dt = 0.02;
 	n = mN;
@@ -11,8 +11,10 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8){
 		bool isGood = false;
 		Vector2Df tmp;
 		while(isGood == false){
-			tmp = Vector2Df(r.Gauss() , r.Gauss());
+			tmp = Vector2Df(r.Gauss(0 , 2) , r.Gauss(0 , 2));
 			isGood = true;
+			if(tmp.x() > maxCord || tmp.y() > maxCord || tmp.x() < -maxCord || tmp.y() < -maxCord)
+				isGood = false;
 			for(int j = 0 ; j < i ; j++){
 				float diss = (tmp - balls[j].pos).getLength();
 				if(diss < minDis)
@@ -116,8 +118,8 @@ void WorldModel::collisionDitection(){
 			if(i > j){
 				Vector2Df iNextPos = balls[i].pos + speedAt(i , time + dt) * dt;
 				Vector2Df jNextPos = balls[j].pos + speedAt(j , time + dt) * dt;
-				if((balls[i].pos - balls[j].pos).getLenght() < balls[i].radius + balls[j].radius && 
-						(iNextPos - jNextPos).getLenght() < balls[i].radius + balls[j].radius)
+				if((balls[i].pos - balls[j].pos).getLength() < balls[i].radius + balls[j].radius && 
+						(iNextPos - jNextPos).getLength() < balls[i].radius + balls[j].radius)
 					calcAfterCollisionVelocity(i , j);
 			}
 }
@@ -125,7 +127,7 @@ void WorldModel::update(){
 	time += dt;
 	speedCalc();
 	for(int i = 0 ; i < n ; i++){
-		balls[i].pos.X() += balls[i].velocity.X() * dt;
-		balls[i].pos.Y() += balls[i].velocity.Y() * dt;
+		balls[i].pos.x() += balls[i].velocity.x() * dt;
+		balls[i].pos.y() += balls[i].velocity.y() * dt;
 	}
 }

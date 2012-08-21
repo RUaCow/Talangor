@@ -14,6 +14,7 @@
 
 class WorldModel{
 	int n;
+	const float maxCord;
 	std::vector<Ball> balls;
 	float minDis;
 	float time;
@@ -32,6 +33,7 @@ public:
 	void calcAfterCollisionVelocity(int n1 , int n2);
 	Vector2Df speedAt(int n , float t);
 	void update();
+	friend class GUI;
 };
 
 #endif //_WORLDMODEL_H
