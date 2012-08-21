@@ -1,4 +1,5 @@
 #include "WorldModel.h"
+#include "Gui.h"
 #include <iostream>
 using namespace std;
 int main(){
