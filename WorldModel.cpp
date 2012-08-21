@@ -110,6 +110,7 @@ Vector2Df WorldModel::speedAt(int n , float t)
 	return (balls.at(n).velocity - frictionAccelerationVector * deltaT);
 }
 
+
 void WorldModel::update(){
 	time += dt;
 	speedCalc();

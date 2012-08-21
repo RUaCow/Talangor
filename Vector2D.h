@@ -109,11 +109,12 @@ public:
 	}
 
 	//-=
-	vector2D operator -=(vector2D in)
+	Vector2D operator -=(Vector2D in)
 	{
 		*this = *this - in;
 	}
-	friend ostream& operator<<(ostream& in , const Vector2D& a);
+	template <class C>
+	friend ostream& operator<<(ostream& in , const Vector2D<C>& a);
 };//Vector2D class.
 
 //Type defines:
@@ -127,8 +128,8 @@ inline Vector2Df operator*(float scl , Vector2Df in)
 	return Vector2Df(in.getX() * scl , in.getY() * scl);
 }
 
-template <class T>
-ostream& operator<<(ostream& in , const Vector2D& a)
+template <class C>
+ostream& operator<<(ostream& in , const Vector2D<C>& a)
 {
 		in << a.x << " " << a.y;
 		return in;
