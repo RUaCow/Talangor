@@ -4,8 +4,8 @@
 	Purpose : Handling the balls.
 	Date : 8 / 1 / 2012
 **************************************************************/
-#ifndef BALL_H
-#define BALL_H
+#ifndef BaLl_H
+#define BaLl_H
 
 #include "Vector2D.h"
 

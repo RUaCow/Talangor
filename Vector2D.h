@@ -1,5 +1,5 @@
-#ifndef VECTOR2D_H
-#define VECTOR2D_H
+#ifndef VeCtOr2D_h
+#define VeCtOr2D_h
 
 #include <cmath>
 #include <iostream>
