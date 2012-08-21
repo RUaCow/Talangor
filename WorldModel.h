@@ -28,6 +28,7 @@ public:
 	WorldModel(int = 3 , float = 0.5/* , Map mLevelMap = Map()*/);
 	~WorldModel(){}
 	void speedCalc();
+	void calcAfterCollisionVelocity(int n1 , int n2);
 	Vector2Df speedAt(int n , float t);
 	void update();
 };

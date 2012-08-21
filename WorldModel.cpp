@@ -39,6 +39,61 @@ void WorldModel::speedCalc()
 	}
 }
 
+//This function will be called whenever a collision happens.
+void WorldModel::calcAfterCollisionVelocity(int n1 , int n2)
+{
+	//Balls' masses
+	float b1Mass = balls.at(n1).mass , b2Mass = balls.at(n2).mass;
+
+	//Balls' positions
+	float b1X = balls.at(n1).pos.getX() , b1Y = balls.at(n1).pos.getY();
+	float b2X = balls.at(n2).pos.getX() , b2Y = balls.at(n2).pos.getY();
+
+	//Before collision velocity vector of balls.
+	Vector2Df b1VelocityVector = balls.at(n1).velocity;
+	Vector2Df b2VelocityVector = balls.at(n2).velocity;
+
+	//Normal vector to the collision surface.
+	Vector2Df normalVector(b1X- b2X , b1Y - b2Y);
+	//Unit vector of normal vector.
+	Vector2Df unitNormalVector = normalVector.getNormalizedVector();
+
+	//Unit vector of tangent vector to the collision surface.
+	Vector2Df unitTangentVector = unitNormalVector.getPrependicularVector();
+
+	//Balls' scalar velocities in unit normal vector.
+	float b1Velocity_normalVector = b1VelocityVector * unitNormalVector;
+	float b2Velocity_normalVector = b2VelocityVector * unitNormalVector;
+	
+	//Balls' scalar velocities in unit tangent vector.
+	float b1Velocity_tangentVector = b1VelocityVector * unitTangentVector;
+	float b2Velocity_tangentVector = b2VelocityVector * unitTangentVector;
+
+	//Balls' after collison velocities in unit normal vector.
+	float b1NewVelocity_normalVector = (b1Velocity_normalVector * (b1Mass - b2Mass) + 2 * b2Mass * b2Velocity_normalVector) / (b1Mass + b2Mass);
+	float b2NewVelocity_normalVector = (b2Velocity_normalVector * (b2Mass - b1Mass) + 2 * b1Mass * b1Velocity_normalVector) / (b1Mass + b2Mass);
+	
+	/*Balls' after collison velocities in unit tangent vector will
+	remain the same because there is no force acting in that direction.*/
+
+	//Velocity vectors along the normal vector.
+	Vector2Df b1NewVelocityVector_normalVector = b1NewVelocity_normalVector * unitNormalVector;
+	Vector2Df b2NewVelocityVector_normalVector = b2NewVelocity_normalVector * unitNormalVector;
+
+	//Velocity vectors along the tangent vector.
+	Vector2Df b1VelocityVector_tangentVector = b1Velocity_tangentVector * unitTangentVector;
+	Vector2Df b2VelocityVector_tangentVector = b2Velocity_tangentVector * unitTangentVector;
+
+	//New balls' velocities vectors.
+	Vector2Df b1NewVelocityVector = b1NewVelocityVector_normalVector + b1VelocityVector_tangentVector;
+	Vector2Df b2NewVelocityVector = b2NewVelocityVector_normalVector + b2VelocityVector_tangentVector;
+
+	//Setting balls' velocities!!!!!POOOOOOOOFFF...
+	balls.at(n1).velocity = b1NewVelocityVector , balls.at(n2).velocity = b2NewVelocityVector;
+
+	//Wooooooooooooow!!It's finished!!!!YEEEEEEEEEEEEEEEEEEESssssSSSsssSSSsssSSS:D
+}
+
 //This function will give the speed of a specified ball in specific time.
 Vector2Df WorldModel::speedAt(int n , float t)
 {
