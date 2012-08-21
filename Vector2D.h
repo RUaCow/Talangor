@@ -8,41 +8,41 @@ template <class T>
 
 class Vector2D
 {
-	T x , y;
+	T mx , my;
 public:
 	//constructors
-	Vector2D(T x , T y)
+	Vector2D(T mx , T my)
 	{
-		this->x = x;
-		this->y = y;
+		this->mx = mx;
+		this->my = my;
 	}
 
 	Vector2D(void)
 	{
-		x = 0;
-		y = 0;
+		mx = 0;
+		my = 0;
 	}
 
 	//getters
 	//Get length of the vector.
 	float getLength(void)
 	{
-		return sqrtf(x * x + y * y);
+		return sqrtf(mx * mx + my * my);
 	}
 
 	//Get normalized vector of this vector.
 	Vector2D getNormalizedVector(void)
 	{
 		Vector2D res;
-		if ( x == 0 && y == 0 )
+		if ( mx == 0 && my == 0 )
 		{
-			res.x = 0;
-			res.y = 0;
+			res.mx = 0;
+			res.my = 0;
 		}
 		else
 		{
-			res.x = this->x / this->getLength();
-			res.y = this->y / this->getLength();
+			res.mx = this->mx / this->getLength();
+			res.my = this->my / this->getLength();
 		}
 		return res;
 	}
@@ -50,62 +50,68 @@ public:
 	//Get prependicular vector.
 	Vector2D getPrependicularVector(void)
 	{
-		return Vector2D(-y , x);
+		return Vector2D(-my , mx);
 	}
-	T& X(){
-		return x;
+	T& x(){
+		return mx;
 	}
-	T& Y(){
-		return y;
+	const T& x() const {
+		return mx;
 	}
-	//Get x component.
+	T& y(){
+		return my;
+	}
+	const T& y() const {
+		return my;
+	}
+	//Get mx component.
 	T getX(void)
 	{
-		return x;
+		return mx;
 	}
 
-	//Get y component.
+	//Get my component.
 	T getY(void)
 	{
-		return y;
+		return my;
 	}
 
 	//setters
-	//Set x component.
+	//Set mx component.
 	void setX(T in)
 	{
-		x = in;
+		mx = in;
 	}
 
-	//Set y component.
+	//Set my component.
 	void setY(T in)
 	{
-		y = in;
+		my = in;
 	}
 
 	//OPERATORS
 	//Dot product of two vectors.
 	float operator *(Vector2D in) 
 	{
-		return (this->x * in.x + this->y * in.y);
+		return (this->mx * in.mx + this->my * in.my);
 	}
 
 	//Multipication of vector and scalar.
 	Vector2D operator *(float in)
 	{
-		return Vector2D(this->x * in , this->y * in);
+		return Vector2D(this->mx * in , this->my * in);
 	}
 
 	//Addition of two vectors.
 	Vector2D operator +(Vector2D in)
 	{
-		return Vector2D(this->x + in.x , this->y + in.y);
+		return Vector2D(this->mx + in.mx , this->my + in.my);
 	}
 
 	//Substraction of two vectors.
 	Vector2D operator -(Vector2D in)
 	{
-		return Vector2D(this->x - in.x , this->y - in.y);
+		return Vector2D(this->mx - in.mx , this->my - in.my);
 	}
 
 	//-=
@@ -117,9 +123,9 @@ public:
 	friend ostream& operator<<(ostream& in , const Vector2D<C>& a);
 };//Vector2D class.
 
-//Type defines:
-typedef Vector2D<int> Vector2Di;
-typedef Vector2D<float> Vector2Df;
+//Tmype defines:
+tmypedef Vector2D<int> Vector2Di;
+tmypedef Vector2D<float> Vector2Df;
 
 
 //Multipicationn of a scalar and a vector.
@@ -131,7 +137,7 @@ inline Vector2Df operator*(float scl , Vector2Df in)
 template <class C>
 ostream& operator<<(ostream& in , const Vector2D<C>& a)
 {
-		in << a.x << " " << a.y;
+		in << a.mx << " " << a.my;
 		return in;
 }
 
