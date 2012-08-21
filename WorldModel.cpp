@@ -24,6 +24,7 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8){
 	}
 }
 
+//This function will calculate the speed of ball for the 'time + dt'.
 void WorldModel::speedCalc()
 {
 	for(int i = 0 ; i < n ; i++)
@@ -36,6 +37,22 @@ void WorldModel::speedCalc()
 
 		balls.at(n).velocity -= frictionAccelerationVector * dt;
 	}
+}
+
+//This function will give the speed of a specified ball in specific time.
+Vector2Df WorldModel::speedAt(int n , float t)
+{
+	if(balls.at(n).velocity.getLength() == 0)
+		return Vector2Df(0.0f , 0.0f);
+
+	float deltaT = t - time;
+	float frictionAcceleration = G * COF;
+	float xFactor = balls.at(n).velocity.getNormalizedVector().getX();
+	float yFactor = balls.at(n).velocity.getNormalizedVector().getY();
+
+	Vector2Df frictionAccelerationVector(frictionAcceleration * xFactor , frictionAcceleration * yFactor);
+
+	return (balls.at(n).velocity - frictionAccelerationVector * deltaT);
 }
 
 void WorldModel::update(){
