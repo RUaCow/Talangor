@@ -3,6 +3,7 @@
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_gfxPrimitives.h>
+#include "Vector2D.h"
 
 class WorldModel;
 
@@ -13,16 +14,15 @@ class GUI {
 public:
 
 	GUI(); // Constructor
-	~GUI(); // Destructor
+	~GUI(); // destructor
 
 	void clear(); // Clear output screen
-	void draw(const WorldModel &wm); // Draw world model stuff
+	void draw(const WorldModel &wm); // draw world model stuff
 	void update();
-
 private:
 
-	inline Vector2df convert(const Vector2df &vector) {
-		return Vector2df(vector.x() * (display->w/2) + display->w/2, vector.y() * (display->h/2) + display->h/2);
+	inline Vector2Df convert(const Vector2Df &vector) {
+		return Vector2Df(vector.x() * (display->w/2) + display->w/2, vector.y() * (display->h/2) + display->h/2);
 	}
 
 }; // class GUI

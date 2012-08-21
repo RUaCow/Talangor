@@ -11,7 +11,7 @@ GUI::~GUI() {
 }
 
 void GUI::clear() {
-	SDL_FilledRect(display, NULL, NULL, SDL_MapRGBA(display->format, 0, 0, 0, 0));
+	SDL_FillRect(display, NULL, SDL_MapRGBA(display->format, 0, 0, 0, 0));
 }
 
 void GUI::draw(const WorldModel &wm) {
