@@ -12,6 +12,7 @@
 class Ball
 {
 	friend class WorldModel;
+	friend class GUI;
 	//Ball's identity
 	int number;
 	//Ball's radius
