@@ -124,8 +124,8 @@ public:
 };//Vector2D class.
 
 //Tmype defines:
-tmypedef Vector2D<int> Vector2Di;
-tmypedef Vector2D<float> Vector2Df;
+typedef Vector2D<int> Vector2Di;
+typedef Vector2D<float> Vector2Df;
 
 
 //Multipicationn of a scalar and a vector.
