@@ -21,7 +21,7 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8) , maxC
 					isGood = false;
 			}
 		}
-		Ball newBall(i , 5 , 10 , tmp);
+		Ball newBall(i , 0.01 , 5 , tmp);
 		balls.push_back(newBall);
 	}
 }
