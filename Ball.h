@@ -16,7 +16,7 @@ class Ball
 	//Ball's identity
 	int number;
 	//Ball's radius
-	int radius;
+	float radius;
 	//Ball's mass
 	float mass;
 	//Ball's velocity
@@ -25,7 +25,7 @@ class Ball
 	//Added By Elk
 	Vector2Df pos; //Ball's Position
 public:
-	Ball(int mNumber , int mRadius , float mMass , Vector2Df mPos);
+	Ball(int mNumber , float mRadius , float mMass , Vector2Df mPos);
 };
 
 #endif //BALL_H
