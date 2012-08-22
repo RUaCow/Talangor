@@ -4,6 +4,7 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8) , maxC
 	time = 0;
 	dt = 0.02;
 	n = mN;
+	minDis2Lines = 0.3;
 	minDis = mMinDis;
 	COF = 0.2f;
 	Random r;
@@ -15,6 +16,15 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8) , maxC
 			isGood = true;
 			if(tmp.x() > maxCord || tmp.y() > maxCord || tmp.x() < -maxCord || tmp.y() < -maxCord)
 				isGood = false;
+			if(i >= 2)
+				for(int j = 0 ; j < i ; j++)
+					for(int k = 0 ; k < i ; k++){
+						float rate = ((balls[k].pos - balls[j].pos) * (balls[k].pos - tmp)) / 
+							((balls[k].pos - balls[j].pos).getLength() * (balls[k].pos - tmp).getLength());
+						float thetaByRate = acos(rate);
+						if(j > k && sin(thetaByRate) * (balls[k].pos - tmp).getLength() < minDis2Lines)
+							isGood = false;
+					}
 			for(int j = 0 ; j < i ; j++){
 				float diss = (tmp - balls[j].pos).getLength();
 				if(diss < minDis)

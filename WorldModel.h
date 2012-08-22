@@ -11,12 +11,14 @@
 //#include "Map.h"
 #include <vector>
 #include <iostream>
-
+#include <cmath>
 class WorldModel{
 	int n;
 	const float maxCord;
 	std::vector<Ball> balls;
 	float minDis;
+	//min Disstance of each ball from the lines
+	float minDis2Lines;
 	float time;
 	float dt;
 	//Coefficient of Friction (COF)
