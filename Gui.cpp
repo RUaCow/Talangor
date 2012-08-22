@@ -11,6 +11,10 @@ GUI::~GUI() {
 	SDL_Quit();
 }
 
+pair<Vector2Df , Vector2Df> GUI::mouseRelease(){
+	pair<Vector2Df , Vector2Df> retVal(Vector2Df(0 , 0) , Vector2Df(0 , 0));
+	return retVal;
+}
 void GUI::clear() {
 	SDL_FillRect(display, NULL, SDL_MapRGBA(display->format, 0, 0, 0, 0));
 }
@@ -20,7 +24,6 @@ void GUI::draw(const WorldModel &wm) {
 	for(int i = 0; i < wm.balls.size(); i ++)
 		circleRGBA(display, convert(wm.balls[i].pos).x(), convert(wm.balls[i].pos).y(), wm.balls[i].radius * (float)display->w,
 				255, 255, 255, 255);
-	cerr << wm.balls[0].radius * (float) display->w << endl;
 }
 
 void GUI::update() {

@@ -16,6 +16,7 @@ public:
 	GUI(); // Constructor
 	~GUI(); // destructor
 
+	pair<Vector2Df , Vector2Df> mouseRelease();
 	void clear(); // Clear output screen
 	void draw(const WorldModel &wm); // draw world model stuff
 	void update();
