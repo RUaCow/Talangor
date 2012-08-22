@@ -102,6 +102,12 @@ public:
 		return Vector2D(this->mx * in , this->my * in);
 	}
 
+	//Division of vector and scalar.
+	Vector2D operator /(float in)
+	{
+		return Vector2D(this->mx / in , this->my / in);
+	}
+
 	//Addition of two vectors.
 	Vector2D operator +(Vector2D in)
 	{
