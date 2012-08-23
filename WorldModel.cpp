@@ -6,7 +6,7 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8) , maxC
 	n = mN;
 	minDis2Lines = 0.3;
 	minDis = mMinDis;
-	COF = 0.2f;
+	COF = 0.1f;
 	Random r;
 	for(int i = 0 ; i < n ; i++){
 		bool isGood = false;
@@ -36,18 +36,29 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8) , maxC
 	}
 }
 
+bool WorldModel::isStoped(int i){
+	float epsilon = 0.0001;
+	return (((balls[i].velocity.x() < epsilon && balls[i].velocity.x() >= 0) || (balls[i].velocity.x() > -epsilon && balls[i].velocity.x() < 0)) && ((balls[i].velocity.y()  < epsilon && balls[i].velocity.y() >= 0) || (balls[i].velocity.y() > -epsilon && balls[i].velocity.y() < 0)));
+}
 //This function will calculate the speed of ball for the 'time + dt'.
 void WorldModel::speedCalc()
 {
 	for(int i = 0 ; i < n ; i++)
 	{
-		float frictionAcceleration = G * COF;
-		float xFactor = balls.at(i).velocity.getNormalizedVector().getX();
-		float yFactor = balls.at(i).velocity.getNormalizedVector().getY();
-
-		Vector2Df frictionAccelerationVector(frictionAcceleration * xFactor , frictionAcceleration * yFactor);
-
-		balls.at(i).velocity -= frictionAccelerationVector * dt;
+		if(!isStoped(i)){
+			float frictionAcceleration = G * COF;
+			float xFactor = balls.at(i).velocity.getNormalizedVector().getX();
+			float yFactor = balls.at(i).velocity.getNormalizedVector().getY();
+			Vector2Df frictionAccelerationVector(frictionAcceleration * xFactor , frictionAcceleration * yFactor);
+			if((frictionAccelerationVector.getX() * dt > balls[i].velocity.getX() && xFactor > 0) || (frictionAccelerationVector.getX() * dt < balls[i].velocity.getX()) && xFactor < 0)
+				balls[i].velocity.x() = 0;
+			else
+				balls[i].velocity.x() -= frictionAccelerationVector.getX() * dt;
+			if((frictionAccelerationVector.getY() * dt > balls[i].velocity.getY() && yFactor > 0) || (frictionAccelerationVector.getY() * dt < balls[i].velocity.getY()) && yFactor < 0)
+				balls[i].velocity.y() = 0;
+			else
+				balls[i].velocity.y() -= frictionAccelerationVector.getY() * dt;
+		}
 	}
 }
 
