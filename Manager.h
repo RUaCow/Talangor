@@ -9,6 +9,7 @@
 
 #include "WorldModel.h"
 #include "Gui.h"
+#include "Vector2D.h"
 
 class Manager{
 	WorldModel wm;
