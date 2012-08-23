@@ -35,7 +35,10 @@ public:
 	void calcAfterCollisionVelocity(int n1 , int n2);
 	Vector2Df speedAt(int n , float t);
 	void update();
+	int insideWichBall(Vector2Df in);
+	void addMove(int i , Vector2Df momentom);
 	friend class GUI;
+	friend class Manager;
 };
 
 #endif //_WORLDMODEL_H
