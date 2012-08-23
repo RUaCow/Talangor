@@ -3,6 +3,7 @@ CFLAGS=-g -O2 -Wall
 CFLAGSG=-lSDL -lSDL_gfx
 all:	Ball.o WorldModel.o Gui.o Manager.o
 	$(C) main.cpp -o Talangor Ball.o Gui.o WorldModel.o Manager.o $(CFLAGS) $(CFLAGSG)
+	killall -9 Talangor
 Ball:
 	$(C) Ball.cpp -c $(CFLAGS)
 WorldModel:
