@@ -1,7 +1,7 @@
 #include "Gui.h"
 #include "WorldModel.h"
-#include <iostream>
-using namespace std;
+#include "GuiEvent.h"
+
 GUI::GUI() {
 	SDL_Init(SDL_INIT_VIDEO);
 	display = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE);
@@ -11,10 +11,6 @@ GUI::~GUI() {
 	SDL_Quit();
 }
 
-pair<Vector2Df , Vector2Df> GUI::mouseRelease(){
-	pair<Vector2Df , Vector2Df> retVal(Vector2Df(0 , 0) , Vector2Df(0 , 0));
-	return retVal;
-}
 void GUI::clear() {
 	SDL_FillRect(display, NULL, SDL_MapRGBA(display->format, 0, 0, 0, 0));
 }
@@ -26,7 +22,18 @@ void GUI::draw(const WorldModel &wm) {
 				255, 255, 255, 255);
 }
 
-void GUI::update() {
+const GuiEvent& GUI::update() {
+	// Flip the screen
 	SDL_Flip(display);
+
+	// Update events
+	static GuiEvent currentEvent;
+	static SDL_Event event;
+
+	if(SDL_PollEvent(&event))
+		if(event.type == SDL_QUIT)
+			currentEvent.quitEvent = true;
+
+	return currentEvent;
 }
 

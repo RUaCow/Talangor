@@ -6,6 +6,7 @@
 #include "Vector2D.h"
 
 class WorldModel;
+struct GuiEvent;
 
 class GUI {
 
@@ -14,12 +15,12 @@ class GUI {
 public:
 
 	GUI(); // Constructor
-	~GUI(); // destructor
+	~GUI(); // Destructor
 
-	pair<Vector2Df , Vector2Df> mouseRelease();
 	void clear(); // Clear output screen
-	void draw(const WorldModel &wm); // draw world model stuff
-	void update();
+	void draw(const WorldModel &wm); // Draw world model stuff
+	const GuiEvent& update(); // Flip the output screen and update events
+
 private:
 
 	inline Vector2Df convert(const Vector2Df &vector) {
