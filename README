@@ -1,2 +1,7 @@
 This is gonna be a game!
 By RUaCow Team.
+
+Instructions:
+	Bin folder contains binaries after compilation.
+	Makefile and also compiled object files are stored in Build folder.
+	Source files are in the Source folder.
