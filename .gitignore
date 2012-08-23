@@ -1,3 +1,4 @@
-*.o
-*.swp
-Talangor
+Build/*
+!Build/Makefile
+Bin/*
+
