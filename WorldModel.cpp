@@ -31,7 +31,7 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8) , maxC
 					isGood = false;
 			}
 		}
-		Ball newBall(i , 0.01 , 5 , tmp);
+		Ball newBall(i , 0.01 , 50 , tmp);
 		balls.push_back(newBall);
 	}
 }
@@ -42,12 +42,12 @@ void WorldModel::speedCalc()
 	for(int i = 0 ; i < n ; i++)
 	{
 		float frictionAcceleration = G * COF;
-		float xFactor = balls.at(n).velocity.getNormalizedVector().getX();
-		float yFactor = balls.at(n).velocity.getNormalizedVector().getY();
+		float xFactor = balls.at(i).velocity.getNormalizedVector().getX();
+		float yFactor = balls.at(i).velocity.getNormalizedVector().getY();
 
 		Vector2Df frictionAccelerationVector(frictionAcceleration * xFactor , frictionAcceleration * yFactor);
 
-		balls.at(n).velocity -= frictionAccelerationVector * dt;
+		balls.at(i).velocity -= frictionAccelerationVector * dt;
 	}
 }
 
@@ -136,8 +136,21 @@ void WorldModel::collisionDitection(){
 void WorldModel::update(){
 	time += dt;
 	speedCalc();
-	for(int i = 0 ; i < n ; i++){
+	for(int i = 0 ; i < balls.size() ; i++){
 		balls[i].pos.x() += balls[i].velocity.x() * dt;
 		balls[i].pos.y() += balls[i].velocity.y() * dt;
 	}
+}
+
+int WorldModel::insideWichBall(Vector2Df in){
+	int retVal = -1;
+	for(int i = 0 ; i < balls.size() ; i++){
+		if((in - balls[i].pos).getLength() < balls[i].radius)
+			retVal = i;
+	}
+	return retVal;
+}
+
+void WorldModel::addMove(int i , Vector2Df momentom){
+	balls[i].velocity = balls[i].velocity + momentom;
 }
