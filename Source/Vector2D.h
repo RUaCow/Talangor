@@ -125,6 +125,21 @@ public:
 	{
 		*this = *this - in;
 	}
+	//+=
+	Vector2D operator +=(Vector2D in)
+	{
+		*this = *this + in;
+	}
+	//*=
+	Vector2D operator *=(float in)
+	{
+		*this = *this * in;
+	}
+	// /=
+	Vector2D operator /=(float in)
+	{
+		*this = *this / in;
+	}
 	template <class C>
 	friend ostream& operator<<(ostream& in , const Vector2D<C>& a);
 };//Vector2D class.
