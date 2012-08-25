@@ -133,7 +133,7 @@ Vector2Df WorldModel::speedAt(int n , float t)
 	return (balls.at(n).velocity - frictionAccelerationVector * deltaT);
 }
 
-void WorldModel::collisionDitection(){
+void WorldModel::collisionDetection(){
 	for(int i = 0 ; i < balls.size() ; i++)
 		for(int j = 0 ; j < balls.size() ; j++)
 			if(i > j){
