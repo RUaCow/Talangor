@@ -157,6 +157,12 @@ inline Vector2Df operator*(float scl , Vector2Df in)
 	return in * scl;
 }
 
+//Determinant of a vector.
+inline float determinant(Vector2Df in1 , Vector2Df in2)
+{
+	return(in1.x() * in2.y() - in1.y() * in2.x());
+}
+
 template <class C>
 ostream& operator<<(ostream& in , const Vector2D<C>& a)
 {
