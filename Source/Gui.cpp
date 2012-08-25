@@ -28,11 +28,19 @@ const GuiEvent& GUI::update() {
 
 	// Update events
 	static GuiEvent currentEvent;
-	static SDL_Event event;
+	SDL_Event event;
+
+	currentEvent.click = false;
 
 	if(SDL_PollEvent(&event))
 		if(event.type == SDL_QUIT)
 			currentEvent.quitEvent = true;
+		else if(event.type == SDL_MOUSEBUTTONDOWN)
+			currentEvent.clickStart = Vector2df(event.button.x, event.button.y);
+		else if(event.type == SDL_MOUSEBUTTONUP) {
+			currentEvent.click = true;
+			currentEvent.clickEnd = Vector2df(event.button.x, event.button.y);
+		}
 
 	return currentEvent;
 }

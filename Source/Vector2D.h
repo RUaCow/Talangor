@@ -148,6 +148,8 @@ public:
 typedef Vector2D<int> Vector2Di;
 typedef Vector2D<float> Vector2Df;
 
+typedef Vector2Di Vector2di;
+typedef Vector2Df Vector2df;
 
 //Multipicationn of a scalar and a vector.
 inline Vector2Df operator*(float scl , Vector2Df in)
