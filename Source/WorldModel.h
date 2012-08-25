@@ -39,7 +39,7 @@ public:
 	Vector2Df speedAt(int n , float t);
 	void update();
 	int insideWichBall(Vector2Df in);
-	void addMove(int i , Vector2Df momentom);
+	void addMove(int i , Vector2Df cueVelocity);
 	friend class GUI;
 	friend class Manager;
 };
