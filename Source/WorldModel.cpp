@@ -140,7 +140,7 @@ void WorldModel::collisionDitection(){
 				Vector2Df iNextPos = balls[i].pos + speedAt(i , time + dt) * dt;
 				Vector2Df jNextPos = balls[j].pos + speedAt(j , time + dt) * dt;
 				if((balls[i].pos - balls[j].pos).getLength() < balls[i].radius + balls[j].radius && 
-						(iNextPos - jNextPos).getLength() < balls[i].radius + balls[j].radius)
+						(iNextPos - jNextPos).getLength() < balls[i].pos - balls[j].pos).getLength())
 					calcAfterCollisionVelocity(i , j);
 			}
 }
