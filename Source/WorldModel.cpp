@@ -1,6 +1,6 @@
 #include "WorldModel.h"
 using namespace std;
-WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8) , maxCord(1.0){
+WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8) , maxCord(1.0) , CUE_MASS(1.0f){
 	time = 0;
 	dt = 0.02;
 	n = mN;
@@ -133,6 +133,7 @@ Vector2Df WorldModel::speedAt(int n , float t)
 	return (balls.at(n).velocity - frictionAccelerationVector * deltaT);
 }
 
+//This will detect any collision between the balls and process them.
 void WorldModel::collisionDetection(){
 	for(int i = 0 ; i < balls.size() ; i++)
 		for(int j = 0 ; j < balls.size() ; j++)
@@ -162,6 +163,8 @@ int WorldModel::insideWichBall(Vector2Df in){
 	return retVal;
 }
 
-void WorldModel::addMove(int i , Vector2Df momentom){
-	balls[i].velocity = balls[i].velocity + momentom;
+//This will affect the player's move into the game.
+void WorldModel::addMove(int i , Vector2Df cueVelocity)
+{
+	balls.at(i).velocity = (CUE_MASS * cueVelocity + balls.at(i).mass * balls.at(i).velocity) / balls.at(i).mass;
 }

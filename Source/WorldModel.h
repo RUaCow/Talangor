@@ -25,6 +25,8 @@ class WorldModel{
 	float COF;
 	//Gravity Acceleration
 	const float G;
+	//Cue mass.
+	const float CUE_MASS;
 	void collisionDetection();
 	bool isStoped(int i);
 	//Map levelMap;
