@@ -152,7 +152,7 @@ typedef Vector2D<float> Vector2Df;
 //Multipicationn of a scalar and a vector.
 inline Vector2Df operator*(float scl , Vector2Df in)
 {
-	return Vector2Df(in.getX() * scl , in.getY() * scl);
+	return in * scl;
 }
 
 template <class C>
