@@ -31,7 +31,7 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/): maxCord(1.0)
 					isGood = false;
 			}
 		}
-		Ball newBall(i , 0.01 , 50 , tmp);
+		Ball newBall(i , 0.02 , 50 , tmp);
 		balls.push_back(newBall);
 	}
 }
@@ -158,7 +158,7 @@ void WorldModel::update(){
 int WorldModel::insideWichBall(Vector2Df in){
 	int retVal = -1;
 	for(int i = 0 ; i < (int)balls.size() ; i++){
-		if((in - balls[i].pos).getLength() < balls[i].radius)
+		if((in - balls[i].pos).getLength() <= balls[i].radius)
 			retVal = i;
 	}
 	return retVal;
