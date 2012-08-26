@@ -23,25 +23,39 @@ void GUI::draw(const WorldModel &wm) {
 }
 
 const GuiEvent& GUI::update() {
-	// Flip the screen
-	SDL_Flip(display);
-
 	// Update events
+
 	static GuiEvent currentEvent;
-	SDL_Event event;
+	static SDL_Event event;
 
 	currentEvent.click = false;
 
+	if(currentEvent.buttonState == BTN_PRESSED)
+		currentEvent.buttonState = BTN_HOLD;
+	else if(currentEvent.buttonState == BTN_RELEASED)
+		currentEvent.buttonState = BTN_NONE;
+	
 	if(SDL_PollEvent(&event)){
 		if(event.type == SDL_QUIT)
 			currentEvent.quitEvent = true;
-		else if(event.type == SDL_MOUSEBUTTONDOWN)
+		else if(event.type == SDL_MOUSEBUTTONDOWN) {
+			currentEvent.buttonState = BTN_PRESSED;
 			currentEvent.clickStart = deconvert(Vector2df(event.button.x, event.button.y));
-		else if(event.type == SDL_MOUSEBUTTONUP) {
+		} else if(event.type == SDL_MOUSEBUTTONUP) {
+			currentEvent.buttonState = BTN_RELEASED;
 			currentEvent.click = true;
 			currentEvent.clickEnd = deconvert(Vector2df(event.button.x, event.button.y));
 		}
 	}
+
+	// Draw force vector
+	if(currentEvent.buttonState == BTN_HOLD)
+		lineRGBA(display, convert(currentEvent.clickStart).x(), convert(currentEvent.clickStart).y(), event.button.x, event.button.y,
+				255, 255, 255, 255);
+
+	// Flip the screen
+	SDL_Flip(display);
+
 	return currentEvent;
 }
 
