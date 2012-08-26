@@ -24,10 +24,10 @@ public:
 private:
 
 	inline Vector2Df convert(const Vector2Df &vector) {
-		return Vector2Df(vector.x() * (display->w/2) + display->w/2, vector.y() * (display->h/2) + display->h/2);
+		return Vector2Df(vector.x() * (display->w/2) + display->w/2, vector.y() * (display->w/2) + display->h/2);
 	}
 	inline Vector2Df deconvert(const Vector2Df &vector) {
-		return Vector2Df((vector.x() - (display->w/2)) / (display->w/2), (vector.y() - (display->h/2)) / (display->h/2));
+		return Vector2Df((vector.x() - (display->w/2)) / (display->w/2), (vector.y() - (display->h/2)) / (display->w/2));
 	}
 
 }; // class GUI
