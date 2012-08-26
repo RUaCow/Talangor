@@ -1,12 +1,12 @@
 #include "WorldModel.h"
 using namespace std;
-WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/): maxCord(1.0) , G(9.8) , CUE_MASS(100.0f){
+WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/): maxCord(1.0) , G(9.8) , CUE_MASS(1.0f){
 	time = 0;
-	dt = 0.02;
+	dt = 0.0002;
 	n = mN;
 	minDis2Lines = 0.3;
 	minDis = mMinDis;
-	COF = 0.05f;
+	COF = 0.2f;
 	Random r;
 	for(int i = 0 ; i < n ; i++){
 		bool isGood = false;
@@ -31,7 +31,7 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/): maxCord(1.0)
 					isGood = false;
 			}
 		}
-		Ball newBall(i , 0.02 , 50 , tmp);
+		Ball newBall(i , 0.02 , 0.05 , tmp);
 		balls.push_back(newBall);
 	}
 }
