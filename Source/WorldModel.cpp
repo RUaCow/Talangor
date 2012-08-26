@@ -1,12 +1,12 @@
 #include "WorldModel.h"
 using namespace std;
-WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/): maxCord(1.0) , G(9.8) , CUE_MASS(1.0f){
+WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/): maxCord(1.0) , G(9.8) , CUE_MASS(100.0f){
 	time = 0;
 	dt = 0.02;
 	n = mN;
 	minDis2Lines = 0.3;
 	minDis = mMinDis;
-	COF = 0.1f;
+	COF = 0.05f;
 	Random r;
 	for(int i = 0 ; i < n ; i++){
 		bool isGood = false;
@@ -147,6 +147,7 @@ void WorldModel::collisionDetection(){
 }
 void WorldModel::update(){
 	time += dt;
+	collisionDetection();
 	speedCalc();
 	for(int i = 0 ; i < (int)balls.size() ; i++){
 		balls[i].pos.x() += balls[i].velocity.x() * dt;
