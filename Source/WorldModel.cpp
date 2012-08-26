@@ -1,6 +1,6 @@
 #include "WorldModel.h"
 using namespace std;
-WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/):G(9.8) , maxCord(1.0) , CUE_MASS(1.0f){
+WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/): maxCord(1.0) , G(9.8) , CUE_MASS(1.0f){
 	time = 0;
 	dt = 0.02;
 	n = mN;
@@ -50,11 +50,11 @@ void WorldModel::speedCalc()
 			float xFactor = balls.at(i).velocity.getNormalizedVector().getX();
 			float yFactor = balls.at(i).velocity.getNormalizedVector().getY();
 			Vector2Df frictionAccelerationVector(frictionAcceleration * xFactor , frictionAcceleration * yFactor);
-			if((frictionAccelerationVector.getX() * dt > balls[i].velocity.getX() && xFactor > 0) || (frictionAccelerationVector.getX() * dt < balls[i].velocity.getX()) && xFactor < 0)
+			if((frictionAccelerationVector.getX() * dt > balls[i].velocity.getX() && xFactor > 0) || ((frictionAccelerationVector.getX() * dt < balls[i].velocity.getX()) && xFactor < 0))
 				balls[i].velocity.x() = 0;
 			else
 				balls[i].velocity.x() -= frictionAccelerationVector.getX() * dt;
-			if((frictionAccelerationVector.getY() * dt > balls[i].velocity.getY() && yFactor > 0) || (frictionAccelerationVector.getY() * dt < balls[i].velocity.getY()) && yFactor < 0)
+			if((frictionAccelerationVector.getY() * dt > balls[i].velocity.getY() && yFactor > 0) || ((frictionAccelerationVector.getY() * dt < balls[i].velocity.getY()) && yFactor < 0))
 				balls[i].velocity.y() = 0;
 			else
 				balls[i].velocity.y() -= frictionAccelerationVector.getY() * dt;
@@ -135,8 +135,8 @@ Vector2Df WorldModel::speedAt(int n , float t)
 
 //This will detect any collision between the balls and process them.
 void WorldModel::collisionDetection(){
-	for(int i = 0 ; i < balls.size() ; i++)
-		for(int j = 0 ; j < balls.size() ; j++)
+	for(int i = 0 ; i < (int)balls.size() ; i++)
+		for(int j = 0 ; j < (int)balls.size() ; j++)
 			if(i > j){
 				Vector2Df iNextPos = balls[i].pos + speedAt(i , time + dt) * dt;
 				Vector2Df jNextPos = balls[j].pos + speedAt(j , time + dt) * dt;
@@ -148,7 +148,7 @@ void WorldModel::collisionDetection(){
 void WorldModel::update(){
 	time += dt;
 	speedCalc();
-	for(int i = 0 ; i < balls.size() ; i++){
+	for(int i = 0 ; i < (int)balls.size() ; i++){
 		balls[i].pos.x() += balls[i].velocity.x() * dt;
 		balls[i].pos.y() += balls[i].velocity.y() * dt;
 	}
@@ -156,7 +156,7 @@ void WorldModel::update(){
 
 int WorldModel::insideWichBall(Vector2Df in){
 	int retVal = -1;
-	for(int i = 0 ; i < balls.size() ; i++){
+	for(int i = 0 ; i < (int)balls.size() ; i++){
 		if((in - balls[i].pos).getLength() < balls[i].radius)
 			retVal = i;
 	}
