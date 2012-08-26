@@ -17,7 +17,7 @@ void GUI::clear() {
 
 void GUI::draw(const WorldModel &wm) {
 	// Draw balls
-	for(int i = 0; i < wm.balls.size(); i ++)
+	for(int i = 0; i < (int)wm.balls.size(); i ++)
 		circleRGBA(display, convert(wm.balls[i].pos).x(), convert(wm.balls[i].pos).y(), wm.balls[i].radius * (float)display->w,
 				255, 255, 255, 255);
 }
@@ -32,7 +32,7 @@ const GuiEvent& GUI::update() {
 
 	currentEvent.click = false;
 
-	if(SDL_PollEvent(&event))
+	if(SDL_PollEvent(&event)){
 		if(event.type == SDL_QUIT)
 			currentEvent.quitEvent = true;
 		else if(event.type == SDL_MOUSEBUTTONDOWN)
@@ -41,7 +41,7 @@ const GuiEvent& GUI::update() {
 			currentEvent.click = true;
 			currentEvent.clickEnd = Vector2df(event.button.x, event.button.y);
 		}
-
+	}
 	return currentEvent;
 }
 
