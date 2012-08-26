@@ -18,7 +18,7 @@ void GUI::clear() {
 void GUI::draw(const WorldModel &wm) {
 	// Draw balls
 	for(int i = 0; i < (int)wm.balls.size(); i ++)
-		circleRGBA(display, convert(wm.balls[i].pos).x(), convert(wm.balls[i].pos).y(), wm.balls[i].radius * (float)display->w,
+		circleRGBA(display, convert(wm.balls[i].pos).x(), convert(wm.balls[i].pos).y(), wm.balls[i].radius * (float)display->w/2,
 				255, 255, 255, 255);
 }
 
@@ -45,6 +45,8 @@ const GuiEvent& GUI::update() {
 			currentEvent.buttonState = BTN_RELEASED;
 			currentEvent.click = true;
 			currentEvent.clickEnd = deconvert(Vector2df(event.button.x, event.button.y));
+			//cout << Vector2df(event.button.x, event.button.y) << '\t' << convert(currentEvent.clickEnd) << endl;
+			//cout << currentEvent.clickEnd << endl;
 		}
 	}
 
