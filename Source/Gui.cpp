@@ -36,10 +36,10 @@ const GuiEvent& GUI::update() {
 		if(event.type == SDL_QUIT)
 			currentEvent.quitEvent = true;
 		else if(event.type == SDL_MOUSEBUTTONDOWN)
-			currentEvent.clickStart = Vector2df(event.button.x, event.button.y);
+			currentEvent.clickStart = deconvert(Vector2df(event.button.x, event.button.y));
 		else if(event.type == SDL_MOUSEBUTTONUP) {
 			currentEvent.click = true;
-			currentEvent.clickEnd = Vector2df(event.button.x, event.button.y);
+			currentEvent.clickEnd = deconvert(Vector2df(event.button.x, event.button.y));
 		}
 	}
 	return currentEvent;
