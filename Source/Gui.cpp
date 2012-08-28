@@ -20,6 +20,14 @@ void GUI::draw(const WorldModel &wm) {
 	for(int i = 0; i < (int)wm.balls.size(); i ++)
 		circleRGBA(display, convert(wm.balls[i].pos).x(), convert(wm.balls[i].pos).y(), wm.balls[i].radius * (float)display->w/2,
 				255, 255, 255, 255);
+
+	// Draw mini map
+	const Vector2di size(display->w / 5, display->h / 5);
+	const Vector2di margin(20, 20);
+
+	rectangleRGBA(display, margin.x(), display->h - margin.y() - size.y(),
+			margin.x() + size.x(), display->h - margin.y(),
+			255, 255, 255, 255);
 }
 
 const GuiEvent& GUI::update() {
@@ -45,8 +53,6 @@ const GuiEvent& GUI::update() {
 			currentEvent.buttonState = BTN_RELEASED;
 			currentEvent.click = true;
 			currentEvent.clickEnd = deconvert(Vector2df(event.button.x, event.button.y));
-			//cout << Vector2df(event.button.x, event.button.y) << '\t' << convert(currentEvent.clickEnd) << endl;
-			//cout << currentEvent.clickEnd << endl;
 		}
 	}
 
