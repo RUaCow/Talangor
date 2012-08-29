@@ -19,9 +19,18 @@ void Manager::run(){
 		if(event.click){
 			Vector2Df clickS = event.clickStart;
 			Vector2Df clickE = event.clickEnd;
-			int wb = wm.insideWichBall(clickS);
-			if(wb != -1)
-				wm.addMove(wb , clickS - clickE);
+			bool canPlay = gr.turnPlay(wm , event);
+			if(canPlay){
+				int wb = wm.insideWhichBall(clickS);
+				if(wb != -1)
+					wm.addMove(wb , clickS - clickE);
+			}
+		}
+		if(gr.addPoint(wm)){
+			//Show it :D
+		}
+		if(gr.winning()){
+			//Show it too :P
 		}
 		if(event.quitEvent)
 			break;

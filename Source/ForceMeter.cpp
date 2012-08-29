@@ -1,5 +1,5 @@
 #include "ForceMeter.h"
-#include <SDL\SDL_gfxPrimitives.h>
+#include <SDL/SDL_gfxPrimitives.h>
 
 #define PI 3.141592245225
 
