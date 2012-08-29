@@ -28,7 +28,6 @@ class WorldModel{
 	//Cue mass.
 	const float CUE_MASS;
 	void collisionDetection();
-	bool isStoped(int i);
 	//Map levelMap;
 public:
 	//WorldModel();
@@ -36,12 +35,19 @@ public:
 	~WorldModel(){}
 	void speedCalc();
 	void calcAfterCollisionVelocity(int n1 , int n2);
-	Vector2Df speedAt(int n , float t);
 	void update();
-	int insideWichBall(Vector2Df in);
+	
+	Vector2Df speedAt(int n , float t) const;
+	int insideWhichBall(Vector2Df in) const;
+	bool isStoped(int i) const;
+	const Ball& getBall(int i) const;
+	int getN() const; 
+	bool hasCollision() const;
+	
 	void addMove(int i , Vector2Df cueVelocity);
 	friend class GUI;
 	friend class Manager;
+	friend class GameRules;
 };
 
 #endif //_WORLDMODEL_H
