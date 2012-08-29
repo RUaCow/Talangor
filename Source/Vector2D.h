@@ -121,22 +121,22 @@ public:
 	}
 
 	//-=
-	Vector2D operator -=(Vector2D in)
+	void operator -=(Vector2D in)
 	{
 		*this = *this - in;
 	}
 	//+=
-	Vector2D operator +=(Vector2D in)
+	void operator +=(Vector2D in)
 	{
 		*this = *this + in;
 	}
 	//*=
-	Vector2D operator *=(float in)
+	void operator *=(float in)
 	{
 		*this = *this * in;
 	}
 	// /=
-	Vector2D operator /=(float in)
+	void operator /=(float in)
 	{
 		*this = *this / in;
 	}
