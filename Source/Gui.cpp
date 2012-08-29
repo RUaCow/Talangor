@@ -1,10 +1,12 @@
 #include "Gui.h"
 #include "WorldModel.h"
 #include "GuiEvent.h"
+#include "ForceMeter.h"
 
 GUI::GUI() {
 	SDL_Init(SDL_INIT_VIDEO);
 	display = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE);
+	forceMeter = new ForceMeter(display , 100);
 }
 
 GUI::~GUI() {
@@ -59,9 +61,12 @@ const GuiEvent& GUI::update() {
 	}
 
 	// Draw force vector
-	if(currentEvent.buttonState == BTN_HOLD)
+	/*if(currentEvent.buttonState == BTN_HOLD)
 		lineRGBA(display, convert(currentEvent.clickStart).x(), convert(currentEvent.clickStart).y(), event.button.x, event.button.y,
-				255, 255, 255, 255);
+				255, 255, 255, 255);*/
+	if(currentEvent.buttonState == BTN_HOLD)
+		forceMeter->drawForceVector(convert(currentEvent.clickStart) , Vector2Df(event.button.x , event.button.y));
+
 
 	// Flip the screen
 	SDL_Flip(display);
