@@ -18,8 +18,16 @@ void GUI::clear() {
 void GUI::draw(const WorldModel &wm) {
 	// Draw balls
 	for(int i = 0; i < (int)wm.balls.size(); i ++)
-		circleRGBA(display, convert(wm.balls[i].pos).x(), convert(wm.balls[i].pos).y(), wm.balls[i].radius * (float)display->w/2,
-				255, 255, 255, 255);
+	{
+		float alpha = 0;
+		float alphaChange = float(255 / (wm.balls.at(i).radius  * (float)display->w/2 / 2)) ;
+		for(int r = 0 ; r < wm.balls.at(i).radius * (float)display->w/2 ; r++)
+		{
+			circleRGBA(display, convert(wm.balls[i].pos).x(), convert(wm.balls[i].pos).y(), r ,
+				255, 255, 255, alpha);
+			alpha += alphaChange;
+		}
+	}
 }
 
 const GuiEvent& GUI::update() {
