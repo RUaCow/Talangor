@@ -1,6 +1,6 @@
 #include "WorldModel.h"
 using namespace std;
-WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/): maxCord(1.0) , G(9.8) , CUE_MASS(1.0f){
+WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/): maxCord(0.75) , G(9.8) , CUE_MASS(1.0f){
 	time = 0;
 	dt = 0.0002;
 	n = mN;
@@ -36,7 +36,7 @@ WorldModel::WorldModel(int mN , float mMinDis/* , Map mLevelMap*/): maxCord(1.0)
 	}
 }
 
-bool WorldModel::isStoped(int i){
+bool WorldModel::isStoped(int i) const{
 	float epsilon = 0.0001;
 	return (((balls[i].velocity.x() < epsilon && balls[i].velocity.x() >= 0) || (balls[i].velocity.x() > -epsilon && balls[i].velocity.x() < 0)) && ((balls[i].velocity.y()  < epsilon && balls[i].velocity.y() >= 0) || (balls[i].velocity.y() > -epsilon && balls[i].velocity.y() < 0)));
 }
@@ -59,6 +59,8 @@ void WorldModel::speedCalc()
 			else
 				balls[i].velocity.y() -= frictionAccelerationVector.getY() * dt;
 		}
+		else
+			balls[i].prePos = balls[i].pos;
 	}
 }
 
@@ -118,7 +120,7 @@ void WorldModel::calcAfterCollisionVelocity(int n1 , int n2)
 }
 
 //This function will give the speed of a specified ball in specific time.
-Vector2Df WorldModel::speedAt(int n , float t)
+Vector2Df WorldModel::speedAt(int n , float t) const
 {
 	if(balls.at(n).velocity.getLength() == 0)
 		return Vector2Df(0.0f , 0.0f);
@@ -145,6 +147,20 @@ void WorldModel::collisionDetection(){
 					calcAfterCollisionVelocity(i , j);
 			}
 }
+
+bool WorldModel::hasCollision() const {
+	for(int i = 0 ; i < (int)balls.size() ; i++)
+		for(int j = 0 ; j < (int)balls.size() ; j++)
+			if(i > j){
+				Vector2Df iNextPos = balls[i].getPos() + speedAt(i , time + dt) * dt;
+				Vector2Df jNextPos = balls[j].getPos() + speedAt(j , time + dt) * dt;
+				if((balls[i].getPos() - balls[j].getPos()).getLength() < balls[i].radius + balls[j].radius && 
+						(iNextPos - jNextPos).getLength() < (balls[i].getPos() - balls[j].getPos()).getLength())
+					return true;
+			}
+	return false;
+}
+
 void WorldModel::update(){
 	time += dt;
 	collisionDetection();
@@ -155,7 +171,8 @@ void WorldModel::update(){
 	}
 }
 
-int WorldModel::insideWichBall(Vector2Df in){
+int WorldModel::insideWhichBall(Vector2Df in) const
+{
 	int retVal = -1;
 	for(int i = 0 ; i < (int)balls.size() ; i++){
 		if((in - balls[i].pos).getLength() <= balls[i].radius)
@@ -164,6 +181,13 @@ int WorldModel::insideWichBall(Vector2Df in){
 	return retVal;
 }
 
+const Ball& WorldModel::getBall(int i) const{
+	return balls[i];
+}
+
+int WorldModel::getN() const{
+	return (int)balls.size();
+}
 //This will affect the player's move into the game.
 void WorldModel::addMove(int i , Vector2Df cueVelocity)
 {

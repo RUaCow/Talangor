@@ -4,6 +4,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_gfxPrimitives.h>
 #include "Vector2D.h"
+#include "ForceMeter.h"
 
 class WorldModel;
 struct GuiEvent;
@@ -11,6 +12,8 @@ struct GuiEvent;
 class GUI {
 
 	SDL_Surface *display; // Pointer to the SDL primary surface
+
+	ForceMeter forceMeter;
 
 public:
 

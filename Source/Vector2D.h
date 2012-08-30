@@ -25,13 +25,13 @@ public:
 
 	//getters
 	//Get length of the vector.
-	float getLength(void)
+	float getLength(void) const
 	{
 		return sqrtf(mx * mx + my * my);
 	}
 
 	//Get normalized vector of this vector.
-	Vector2D getNormalizedVector(void)
+	Vector2D getNormalizedVector(void) const
 	{
 		Vector2D res;
 		if ( mx == 0 && my == 0 )
@@ -109,34 +109,34 @@ public:
 	}
 
 	//Addition of two vectors.
-	Vector2D operator +(Vector2D in)
+	Vector2D operator +(Vector2D in) const
 	{
 		return Vector2D(this->mx + in.mx , this->my + in.my);
 	}
 
 	//Substraction of two vectors.
-	Vector2D operator -(Vector2D in)
+	Vector2D operator -(Vector2D in) const
 	{
 		return Vector2D(this->mx - in.mx , this->my - in.my);
 	}
 
 	//-=
-	Vector2D operator -=(Vector2D in)
+	void operator -=(Vector2D in)
 	{
 		*this = *this - in;
 	}
 	//+=
-	Vector2D operator +=(Vector2D in)
+	void operator +=(Vector2D in)
 	{
 		*this = *this + in;
 	}
 	//*=
-	Vector2D operator *=(float in)
+	void operator *=(float in)
 	{
 		*this = *this * in;
 	}
 	// /=
-	Vector2D operator /=(float in)
+	void operator /=(float in)
 	{
 		*this = *this / in;
 	}

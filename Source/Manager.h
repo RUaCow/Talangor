@@ -10,10 +10,12 @@
 #include "WorldModel.h"
 #include "Gui.h"
 #include "Vector2D.h"
+#include "GameRules.h"
 
 class Manager{
 	WorldModel wm;
 	GUI ui;
+	GameRules gr;
 public:
 	Manager();
 	~Manager();

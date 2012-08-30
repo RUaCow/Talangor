@@ -1,8 +1,9 @@
 #include "Gui.h"
 #include "WorldModel.h"
 #include "GuiEvent.h"
+#include "ForceMeter.h"
 
-GUI::GUI() {
+GUI::GUI() : forceMeter(100) {
 	SDL_Init(SDL_INIT_VIDEO);
 	display = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE);
 }
@@ -18,8 +19,16 @@ void GUI::clear() {
 void GUI::draw(const WorldModel &wm) {
 	// Draw balls
 	for(int i = 0; i < (int)wm.balls.size(); i ++)
-		circleRGBA(display, convert(wm.balls[i].pos).x(), convert(wm.balls[i].pos).y(), wm.balls[i].radius * (float)display->w/2,
-				255, 255, 255, 255);
+	{
+		float alpha = 0;
+		float alphaChange = float(255 / (wm.balls.at(i).radius  * (float)display->w/2 / 2)) ;
+		for(int r = 0 ; r < wm.balls.at(i).radius * (float)display->w/2 ; r++)
+		{
+			circleRGBA(display, convert(wm.balls[i].pos).x(), convert(wm.balls[i].pos).y(), r ,
+				255, 255, 255, alpha);
+			alpha += alphaChange;
+		}
+	}
 
 	// Draw mini map
 	const Vector2di size(display->w / 5, display->h / 5);
@@ -57,9 +66,12 @@ const GuiEvent& GUI::update() {
 	}
 
 	// Draw force vector
-	if(currentEvent.buttonState == BTN_HOLD)
+	/*if(currentEvent.buttonState == BTN_HOLD)
 		lineRGBA(display, convert(currentEvent.clickStart).x(), convert(currentEvent.clickStart).y(), event.button.x, event.button.y,
-				255, 255, 255, 255);
+				255, 255, 255, 255);*/
+	if(currentEvent.buttonState == BTN_HOLD)
+		forceMeter.drawForceVector(display, convert(currentEvent.clickStart) , Vector2Df(event.button.x , event.button.y));
+
 
 	// Flip the screen
 	SDL_Flip(display);
