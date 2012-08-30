@@ -13,7 +13,8 @@ class GUI {
 
 	SDL_Surface *display; // Pointer to the SDL primary surface
 
-	ForceMeter* forceMeter;
+	ForceMeter forceMeter;
+
 public:
 
 	GUI(); // Constructor
