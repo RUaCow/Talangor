@@ -3,7 +3,7 @@
 #include "GuiEvent.h"
 #include "ForceMeter.h"
 
-GUI::GUI() : forceMeter(display, 100) {
+GUI::GUI() : forceMeter(100) {
 	SDL_Init(SDL_INIT_VIDEO);
 	display = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE);
 }
@@ -64,7 +64,7 @@ const GuiEvent& GUI::update() {
 		lineRGBA(display, convert(currentEvent.clickStart).x(), convert(currentEvent.clickStart).y(), event.button.x, event.button.y,
 				255, 255, 255, 255);*/
 	if(currentEvent.buttonState == BTN_HOLD)
-		forceMeter.drawForceVector(convert(currentEvent.clickStart) , Vector2Df(event.button.x , event.button.y));
+		forceMeter.drawForceVector(display, convert(currentEvent.clickStart) , Vector2Df(event.button.x , event.button.y));
 
 
 	// Flip the screen

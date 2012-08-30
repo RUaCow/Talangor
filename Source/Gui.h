@@ -4,10 +4,10 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_gfxPrimitives.h>
 #include "Vector2D.h"
+#include "ForceMeter.h"
 
 class WorldModel;
 struct GuiEvent;
-class ForceMeter;
 
 class GUI {
 
