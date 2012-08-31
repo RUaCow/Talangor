@@ -3,12 +3,12 @@
 
 #define PI 3.141592245225
 
-ForceMeter::ForceMeter(SDL_Surface* display , float mcolorChangeLength) : colorChangeLength(mcolorChangeLength) , colorChangeRate(255.0f / mcolorChangeLength)
+ForceMeter::ForceMeter(float mcolorChangeLength) : colorChangeLength(mcolorChangeLength) , colorChangeRate(255.0f / mcolorChangeLength)
 {
-	screen = display;
+
 }
 
-void ForceMeter::drawForceVector(Vector2Df firstPoint , Vector2Df secondPoint)
+void ForceMeter::drawForceVector(SDL_Surface *display, Vector2Df firstPoint , Vector2Df secondPoint)
 {
 	//Input vector.
 	Vector2Df mainVector = secondPoint - firstPoint;
@@ -25,7 +25,7 @@ void ForceMeter::drawForceVector(Vector2Df firstPoint , Vector2Df secondPoint)
 	float Red = 0.0f , Green = 255.0f , Blue = 0.0f;
 	for(int l = 0 ; l <= L ; l++)
 	{
-		arcRGBA(screen , firstPoint.x() , firstPoint.y() , l , (alpha - theta) * 180 / PI , (alpha + theta) * 180 / PI , Red , Green , Blue , 255);
+		arcRGBA(display, firstPoint.x() , firstPoint.y() , l , (alpha - theta) * 180 / PI , (alpha + theta) * 180 / PI , Red , Green , Blue , 255);
 		//Setting color for the next arc to draw.
 		if(l >= 0 && l < colorChangeLength)
 		{

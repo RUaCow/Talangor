@@ -13,11 +13,10 @@ struct SDL_Surface;
 
 class ForceMeter
 {
-	SDL_Surface* screen;
 	const float colorChangeLength , colorChangeRate;
 public:
-	ForceMeter(SDL_Surface* display , float mcolorChangeLength);
-	void drawForceVector(Vector2Df firstPoint , Vector2Df secondPoint);
+	ForceMeter(float mcolorChangeLength);
+	void drawForceVector(SDL_Surface *display, Vector2Df firstPoint , Vector2Df secondPoint);
 };
 
 #endif
