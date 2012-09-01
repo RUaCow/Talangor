@@ -2,7 +2,7 @@
 #include "GuiEvent.h"
 
 Manager::Manager(): wm(3 , 0.5){
-
+	gr = new PointGain();
 }
 
 Manager::~Manager(){
@@ -19,17 +19,17 @@ void Manager::run(){
 		if(event.click){
 			Vector2Df clickS = event.clickStart;
 			Vector2Df clickE = event.clickEnd;
-			bool canPlay = gr.turnPlay(wm , event);
+			bool canPlay = gr->turnPlay(wm , event);
 			if(canPlay){
 				int wb = wm.insideWhichBall(clickS);
 				if(wb != -1)
 					wm.addMove(wb , clickS - clickE);
 			}
 		}
-		if(gr.addPoint(wm)){
+		if(gr->addPoint(wm)){
 			//Show it :D
 		}
-		if(gr.winning()){
+		if(gr->winning()){
 			//Show it too :P
 		}
 		if(event.quitEvent)
