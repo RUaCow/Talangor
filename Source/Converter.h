@@ -5,17 +5,18 @@
 
 class Converter {
 
-	const int xMin, xMax;
-	const int yMin, yMax;
+	float xMin, xMax;
+	float yMin, yMax;
 
-	const int width, height;
+	int width, height;
 
 public:
 
-	Converter(const int xmin, const int xmax, const int ymin, const int ymax, const int w, const int h);
+	Converter(const float xmin, const float xmax, const float ymin, const float ymax, const int w, const int h);
 	~Converter();
 
 	Vector2df convert(const Vector2df &vector);
+	Vector2df deconvert(const Vector2df &vector);
 
 }; // class Converter
 
