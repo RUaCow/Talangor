@@ -2,6 +2,10 @@
 #include "GuiEvent.h"
 
 Manager::Manager(): wm(3 , 0.5){
+	//As you know GameType is an int inside Map so here whene we initial the wm and we have Map we can choose how to new GameRules
+	//Till know that we have 2 GameTypes we encode theme as this:
+	//0 = PointGain (for 2 players and ...)
+	//1 = destination (for solo)
 	gr = new PointGain();
 }
 
