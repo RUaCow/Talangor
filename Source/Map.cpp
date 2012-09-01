@@ -11,6 +11,7 @@ Map::Map(char* filePath)
 bool Map::loadMap(char* filePath)
 {
 	//returns false if the version of the map is newer than the game.
+	return true;
 }
 
 MapType Map::getMapType(void)
