@@ -136,7 +136,19 @@ Vector2Df WorldModel::speedAt(int n , float t) const
 }
 
 //This will detect any collision between the balls and process them.
-void WorldModel::collisionDetection(){
+void WorldModel::collisionDetection()
+{
+	//Detect collision between balls and walls.
+	for(int i = 0 ; i < (int)balls.size() ; i++)
+	{
+		//Above and down.It may have bugs in high speeds.
+		if(balls.at(i).pos.y() + balls.at(i).radius >= 0.75 || balls.at(i).pos.y() - balls.at(i).radius <= -0.75)
+			balls.at(i).velocity.y() *= -1;
+		//Left and right.
+		if(balls.at(i).pos.x() + balls.at(i).radius >= 1.0f || balls.at(i).pos.x() - balls.at(i).radius <= -1.0f)
+			balls.at(i).velocity.x() *= -1;
+	}
+	//Detect collision between balls.
 	for(int i = 0 ; i < (int)balls.size() ; i++)
 		for(int j = 0 ; j < (int)balls.size() ; j++)
 			if(i > j){
