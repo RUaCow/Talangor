@@ -6,6 +6,7 @@
 #include "Vector2D.h"
 #include "ForceMeter.h"
 #include "Converter.h"
+#include "Minimap.h"
 
 class WorldModel;
 struct GuiEvent;
@@ -15,6 +16,7 @@ class GUI {
 	SDL_Surface *display; // Pointer to the SDL primary surface
 
 	ForceMeter forceMeter;
+	Minimap minimap;
 
 	Converter converter;
 
