@@ -8,18 +8,17 @@
 #include <vector>
 
 class GameRules{
+protected:
 	bool canPlay;
-	bool didMakeCollision;
 	int whichTurn;
 	std::vector<Player> players;
-	bool diffPositive(float a, float b);
 public:
 	GameRules();
 	GameRules(int n);
 	int getPrevTurn() const;
-	bool turnPlay(const WorldModel& wm , const GuiEvent& ge);
-	bool addPoint(const WorldModel& wm);
-	bool winning();
+	virtual bool turnPlay(const WorldModel& wm , const GuiEvent& ge) = 0;
+	virtual bool addPoint(const WorldModel& wm) = 0;
+	virtual bool winning() = 0;
 };
 
 #endif //_GAMERULLES_H

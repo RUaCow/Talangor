@@ -3,7 +3,7 @@
 #include "GuiEvent.h"
 #include "ForceMeter.h"
 
-GUI::GUI() : forceMeter(100) {
+GUI::GUI() : forceMeter(100), converter(-1, 1, -0.75, 0.75, 800, 600) {
 	SDL_Init(SDL_INIT_VIDEO);
 	display = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE);
 }
@@ -24,7 +24,7 @@ void GUI::draw(const WorldModel &wm) {
 		float alphaChange = float(255 / (wm.balls.at(i).radius  * (float)display->w/2 / 2)) ;
 		for(int r = 0 ; r < wm.balls.at(i).radius * (float)display->w/2 ; r++)
 		{
-			circleRGBA(display, convert(wm.balls[i].pos).x(), convert(wm.balls[i].pos).y(), r ,
+			circleRGBA(display, converter.convert(wm.balls[i].pos).x(), converter.convert(wm.balls[i].pos).y(), r ,
 				255, 255, 255, alpha);
 			alpha += alphaChange;
 		}
@@ -57,11 +57,11 @@ const GuiEvent& GUI::update() {
 			currentEvent.quitEvent = true;
 		else if(event.type == SDL_MOUSEBUTTONDOWN) {
 			currentEvent.buttonState = BTN_PRESSED;
-			currentEvent.clickStart = deconvert(Vector2df(event.button.x, event.button.y));
+			currentEvent.clickStart = converter.deconvert(Vector2df(event.button.x, event.button.y));
 		} else if(event.type == SDL_MOUSEBUTTONUP) {
 			currentEvent.buttonState = BTN_RELEASED;
 			currentEvent.click = true;
-			currentEvent.clickEnd = deconvert(Vector2df(event.button.x, event.button.y));
+			currentEvent.clickEnd = converter.deconvert(Vector2df(event.button.x, event.button.y));
 		}
 	}
 
@@ -70,7 +70,7 @@ const GuiEvent& GUI::update() {
 		lineRGBA(display, convert(currentEvent.clickStart).x(), convert(currentEvent.clickStart).y(), event.button.x, event.button.y,
 				255, 255, 255, 255);*/
 	if(currentEvent.buttonState == BTN_HOLD)
-		forceMeter.drawForceVector(display, convert(currentEvent.clickStart) , Vector2Df(event.button.x , event.button.y));
+		forceMeter.drawForceVector(display, converter.convert(currentEvent.clickStart) , Vector2Df(event.button.x , event.button.y));
 
 
 	// Flip the screen

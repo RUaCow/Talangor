@@ -5,6 +5,7 @@
 #include <SDL/SDL_gfxPrimitives.h>
 #include "Vector2D.h"
 #include "ForceMeter.h"
+#include "Converter.h"
 
 class WorldModel;
 struct GuiEvent;
@@ -15,6 +16,8 @@ class GUI {
 
 	ForceMeter forceMeter;
 
+	Converter converter;
+
 public:
 
 	GUI(); // Constructor
@@ -23,15 +26,6 @@ public:
 	void clear(); // Clear output screen
 	void draw(const WorldModel &wm); // Draw world model stuff
 	const GuiEvent& update(); // Flip the output screen and update events
-
-private:
-
-	inline Vector2Df convert(const Vector2Df &vector) {
-		return Vector2Df(vector.x() * (display->w/2) + display->w/2, vector.y() * (display->w/2) + display->h/2);
-	}
-	inline Vector2Df deconvert(const Vector2Df &vector) {
-		return Vector2Df((vector.x() - (display->w/2)) / (display->w/2), (vector.y() - (display->h/2)) / (display->w/2));
-	}
 
 }; // class GUI
 
