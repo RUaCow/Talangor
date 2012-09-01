@@ -2,7 +2,7 @@
 
 
 
-Shape::Shape(vector<Vector2Df> points , float COF) : COF(COF)
+Shape::Shape(vector<Vector2Df> points , float mCOF) : COF(mCOF)
 {
 	*this->points = points;
 	shapes = new vector<Shape>;
@@ -27,4 +27,9 @@ void Shape::centerCalc(void)
 void Shape::addShape(vector<Vector2Df> spoints , float sCOF)
 {
 	shapes->push_back(Shape(spoints , sCOF));
+}
+
+//I don't know why :D. But it had error: "Source/Shape.h:7:7: error: non-static const member ‘const float Shape::COF’, can’t use default assignment operator"
+Shape& Shape::operator=(Shape const& s){
+	return (Shape&)s;
 }

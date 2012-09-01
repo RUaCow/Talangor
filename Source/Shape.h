@@ -20,11 +20,12 @@ class Shape
 
 public:
 	//constructor
-	Shape(vector<Vector2Df> points , float COF);
+	Shape(vector<Vector2Df> points , float mCOF);
 	//Add a shape into this shape.
 	void addShape(vector<Vector2Df> spoints , float sCOF = -1);
 	//destructor
 	~Shape(void);
+	Shape& operator=(Shape const&);
 };
 
 
