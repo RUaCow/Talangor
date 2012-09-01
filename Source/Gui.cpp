@@ -3,7 +3,7 @@
 #include "GuiEvent.h"
 #include "ForceMeter.h"
 
-GUI::GUI() : forceMeter(100) {
+GUI::GUI() : forceMeter(100), converter(-1, 1, -1, 1, 800, 600) {
 	SDL_Init(SDL_INIT_VIDEO);
 	display = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE);
 }
@@ -17,6 +17,8 @@ void GUI::clear() {
 }
 
 void GUI::draw(const WorldModel &wm) {
+	converter.convert(Vector2df(0, 0));
+
 	// Draw balls
 	for(int i = 0; i < (int)wm.balls.size(); i ++)
 	{

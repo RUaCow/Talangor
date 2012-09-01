@@ -5,6 +5,7 @@
 #include <SDL/SDL_gfxPrimitives.h>
 #include "Vector2D.h"
 #include "ForceMeter.h"
+#include "Converter.h"
 
 class WorldModel;
 struct GuiEvent;
@@ -14,6 +15,8 @@ class GUI {
 	SDL_Surface *display; // Pointer to the SDL primary surface
 
 	ForceMeter forceMeter;
+
+	Converter converter;
 
 public:
 
