@@ -10,9 +10,11 @@ class Shape;
 enum MapType
 {
 	//One player mode with a goal to made.
-	OnePlayer = 0 , //(destination)????
+	goal = 0 , //(destination)????
 	//Two player mode
-	TwoPlayer = 1
+	unlimited = 1 , //Means they play until someone can't do a legal move.It's a temporary name.
+	//CTF!!! (Use your imagination ... I don't know what I'm typing!)
+	CTF = 2 //Two teams.Like the goal mode but here they have to capture flags (goal 1) and retrun to their base (goal 2).
 };
 
 
@@ -25,6 +27,8 @@ class Map
 	char* mapName;
 	//The type of the map.
 	MapType mapType;
+	//Number of players or the limit of the players in some types like CTF.
+	int np;
 	//Default COF.It will be -1 if the default areas are holes!
 	float COF;
 	//Contents of the map : shapes.
