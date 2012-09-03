@@ -1,27 +1,11 @@
 #include "PointGain.h"
-PointGain::PointGain(){
-	canPlay = true;
-	didMakeCollision = false;
-	whichTurn = 0;
-	Player tmp(0 , -1 , 0);
-	players.push_back(tmp);
-}
 
 PointGain::PointGain(int n){
-	canPlay = true;
 	didMakeCollision = false;
-	whichTurn = 0;
-	for(int i = 0 ; i < n ; i ++){
-		Player tmp(i , -1 , 0);
-		players.push_back(tmp);
-	}
 }
 
 bool PointGain::diffPositive(float a, float b){
 	return ((a >= 0 && b < 0) || (b >= 0 && a < 0));
-}
-int PointGain::getPrevTurn() const{
-	return (whichTurn - 1) % players.size();
 }
 
 bool PointGain::turnPlay(const WorldModel& wm , const GuiEvent& ge){
@@ -71,7 +55,7 @@ bool PointGain::addPoint(const WorldModel& wm){
 }
 
 bool PointGain::winning(){
-	if(players[getPrevTurn()].points > 5){
+	if(players[getPrevTurn()].points >= 5){
 		return true;
 	}
 	return false;

@@ -12,9 +12,7 @@ class PointGain: public GameRules{
 	bool didMakeCollision;
 	bool diffPositive(float a, float b);
 public:
-	PointGain();
-	PointGain(int n);
-	int getPrevTurn() const;
+	PointGain(int n = 1);
 	bool turnPlay(const WorldModel& wm , const GuiEvent& ge);
 	bool addPoint(const WorldModel& wm);
 	bool winning();

@@ -1,11 +1,4 @@
 #include "GameRules.h"
-GameRules::GameRules(){
-	canPlay = true;
-	whichTurn = 0;
-	Player tmp(0 , -1 , 0);
-	players.push_back(tmp);
-}
-
 GameRules::GameRules(int n){
 	canPlay = true;
 	whichTurn = 0;

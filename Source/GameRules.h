@@ -13,9 +13,8 @@ protected:
 	int whichTurn;
 	std::vector<Player> players;
 public:
-	GameRules();
-	GameRules(int n);
-	int getPrevTurn() const;
+	GameRules(int n = 1);
+	virtual int getPrevTurn() const;
 	virtual bool turnPlay(const WorldModel& wm , const GuiEvent& ge) = 0;
 	virtual bool addPoint(const WorldModel& wm) = 0;
 	virtual bool winning() = 0;
