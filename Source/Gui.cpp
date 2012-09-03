@@ -29,9 +29,6 @@ void GUI::draw(const WorldModel &wm) {
 			alpha += alphaChange;
 		}
 	}
-
-	// Draw mini map
-	minimap.draw(display, wm);
 }
 
 const GuiEvent& GUI::update() {
@@ -57,6 +54,8 @@ const GuiEvent& GUI::update() {
 			currentEvent.buttonState = BTN_RELEASED;
 			currentEvent.click = true;
 			currentEvent.clickEnd = converter.deconvert(Vector2df(event.button.x, event.button.y));
+			//cout << Vector2df(event.button.x, event.button.y) << '\t' << convert(currentEvent.clickEnd) << endl;
+			//cout << currentEvent.clickEnd << endl;
 		}
 	}
 
