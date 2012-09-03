@@ -7,9 +7,9 @@
 class Shape
 {
 	//Points (First point in this vector is also the last point ==> It is always a closed shape.)
-	vector<Vector2Df>* points;//Unnecessary heap allocation Kiarash?? P.S:Why stack(?) allocation is better than heap one?It can cause stack overflow , isn't that true?Because these are BIG vectors ... :)
+	vector<Vector2Df> points;
 	//Shapes inside this shape.They can vary in COF or simpily they can be holes(COF == -1).
-	vector<Shape>* shapes;
+	vector<Shape> shapes;
 	//Center of Shape
 	Vector2Df center;
 	//COF (It will be -1 if the shape is a hole)
