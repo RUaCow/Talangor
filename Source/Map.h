@@ -25,6 +25,8 @@ class Map
 	float V;
 	//The name of the map.
 	char* mapName;
+	//Comment of the creator.
+	char* comment;
 	//The type of the map.
 	MapType mapType;
 	//Number of players or the limit of the players in some types like CTF.
