@@ -3,7 +3,7 @@
 
 #define PI 3.141592245225
 
-ForceMeter::ForceMeter(float mcolorChangeLength) : colorChangeLength(mcolorChangeLength) , colorChangeRate(255.0f / mcolorChangeLength)
+ForceMeter::ForceMeter(float mcolorChangeLength) : colorChangeLength(mcolorChangeLength) , colorChangeRate(255.0f / mcolorChangeLength) , theta(PI/12)
 {
 
 }
@@ -18,9 +18,6 @@ void ForceMeter::drawForceVector(SDL_Surface *display, Vector2Df firstPoint , Ve
 
 	//alpha : the angle of the input.
 	float alpha = atan2f(mainVector.y() , mainVector.x());
-
-	//theta : the angle of the arc of the force meter.
-	float theta = PI / 12;
 
 	float Red = 0.0f , Green = 255.0f , Blue = 0.0f;
 	for(int l = 0 ; l <= L ; l++)

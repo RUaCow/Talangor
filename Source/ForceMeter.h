@@ -9,11 +9,15 @@
 #include "Vector2D.h"
 
 
+
+
 struct SDL_Surface;
 
 class ForceMeter
 {
 	const float colorChangeLength , colorChangeRate;
+	//theta : the angle of the arc of the force meter.
+	float theta;
 public:
 	ForceMeter(float mcolorChangeLength);
 	void drawForceVector(SDL_Surface *display, Vector2Df firstPoint , Vector2Df secondPoint);
