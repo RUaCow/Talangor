@@ -1,0 +1,38 @@
+@Talangor Map File (TMF) : A sample.
+@This line is a comment.
+@This is version of the map.
+0.1
+@This is map name.
+@(Comment)
+@
+Sample_Map
+@This is creator's comment.
+This is a sample of the great game 'Talangor' by RUaCow team.
+@Map type.(goal = 0 , ...)
+2
+@Limit number or number of the players.
+10
+@Default COF
+-1.0
+@Number of shapes in the map.
+2
+@Shapes of the map.The information format is like the following line:
+@(Number of the shapes inside the shape) (COF of the shape) (Number of the points of the shape) (Points : X1 Y1 X2 Y2 X3 ...) (ENTER)
+@Shapes inside the shape comes after each shape's line.Their format is just like previous line.
+@
+@
+@Shape No.1 : It's a simple triangle with three points.
+0 0.2 3 0.5 0 0 0.5 -0.5 0
+@It has 0 shapes inside so we'll proceed to the next shape.
+@
+@
+@Shape No.2 : A square.
+1 0.1 4 0.5 0.5 -0.5 0.5 -0.5 -0.5 0.5 -0.5
+@It has 1 shape inside:
+@Internal shape No.1 of shape No.2:It is a rectangle.
+0 -1 4 0.3 0.1 -0.2 0.1 -0.2 -0.2 0.3 -0.2
+@The internal shape No.1 of shape No.2 has 0 shapes inside.
+@There are no other internal shapes , neither shapes.
+@This says the file is finished.
+@End of Talngor Map File
+eotmf
