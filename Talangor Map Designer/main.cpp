@@ -7,4 +7,6 @@
 
 int main(int argc , char* argv[])
 {
+	TMDManager manager;
+	return 0;
 }

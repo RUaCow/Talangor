@@ -6,6 +6,7 @@
 
 class Shape
 {
+	friend class Map;
 	//The shape number.
 	int n;
 	//Points (First point in this vector is also the last point ==> It is always a closed shape.)

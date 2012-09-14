@@ -7,6 +7,14 @@ class SDL_GUI;
 
 class TMDManager
 {
+	Map* map;
+	SDL_GUI* gui;
+
+public:
+	//constructor
+	TMDManager(void);
+	//destructor
+	~TMDManager(void);
 };
 
 #endif

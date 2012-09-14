@@ -1,8 +1,8 @@
 /*Map for TMD*/
 #ifndef MaP_h
 #define MaP_h
-#define DEFAULT_PATH ""
 #include <vector>
+#define DEFAULT_PATH ""
 
 
 class Shape;
@@ -38,22 +38,39 @@ class Map
 	float COF;
 	//Contents of the map : shapes.
 	std::vector<Shape> shapes;
+	//This indicates whether the changes have been saved to file or not.
+	bool changesSaved;
 
 	/*IO*/
 	//This will load form file.
 	bool loadMap(void);
 	//This will save to file.
 	bool saveMap(void);
+	//This will put a comment line in the map file.
+	void putComment(FILE* file , char* cm);
+	//This will write shapes information into file.
+	void writeShapesInfo(FILE* file , std::vector<Shape>* shs = NULL);
+	//This will close the map file.
+	void closeTMF(FILE* file);
 
 	/*FUNCTIONS*/
+	//This will add a shape into the map.
 	void addShape(Shape new_shape);
+	//This will change the map name.
+	void changeName(char* newName);
+	//This will change the version.
+	void changeVersion(float version);
+	//This will set the map comment.
+	void setComment(char* comment);
+	//This will change the default COF.
+	void changeCOF(float defCOF);
 
 public:
 	//constructors:
 	//This will load a map to change it.
 	Map(char* filePath);
 	//For a completely new map.
-	Map(float version , MapType type , float defCOF , char* mapName = "untitled" , int np = -1 , char* filePath = DEFAULT_PATH);
+	Map(float version , MapType type , float defCOF = -1 , char* filePath = DEFAULT_PATH , char* mapName = "untitled" , int np = -1);
 
 	//Get map type.
 	const MapType getMapType(void) const;
