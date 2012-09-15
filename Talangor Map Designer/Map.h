@@ -48,8 +48,12 @@ class Map
 	bool saveMap(void);
 	//This will put a comment line in the map file.
 	void putComment(FILE* file , char* cm);
+	//This will ignore comments in the map file.
+	void ignoreCommentLines(FILE* file);
 	//This will write shapes information into file.
 	void writeShapesInfo(FILE* file , std::vector<Shape>* shs = NULL);
+	//This will read shapes information from the file.
+	void readShapesInfo(int n , FILE* file , std::vector<Shape>* shs = NULL);
 	//This will close the map file.
 	void closeTMF(FILE* file);
 
