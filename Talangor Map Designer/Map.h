@@ -56,6 +56,8 @@ class Map
 	void readShapesInfo(int n , FILE* file , std::vector<Shape>* shs = NULL);
 	//This will close the map file.
 	void closeTMF(FILE* file);
+	//This will print map's information.
+	void printMapInfo(void);
 
 	/*FUNCTIONS*/
 	//This will add a shape into the map.

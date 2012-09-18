@@ -25,22 +25,17 @@ Map::Map(float version , MapType type , float defCOF , char* filePath , char* na
 bool Map::loadMap(void)
 {
 	FILE* mapFile = fopen(path , "rb");
-	int a = ftell(mapFile);
 	//Loading ...
 	ignoreCommentLines(mapFile);
-	a = ftell(mapFile);
 	//Version.
 	fscanf(mapFile , "%f\n" , &V);
 	ignoreCommentLines(mapFile);
-	a = ftell(mapFile);
 	//Map name.
 	fgets(mapName , 100 , mapFile);
 	ignoreCommentLines(mapFile);
-	a = ftell(mapFile);
 	//Creator's comment.
 	fgets(comment , 1000 , mapFile);
 	ignoreCommentLines(mapFile);
-	a = ftell(mapFile);
 	//Map type.
 	fscanf(mapFile , "%d\n" , (int*)&mapType);
 	ignoreCommentLines(mapFile);
@@ -58,6 +53,7 @@ bool Map::loadMap(void)
 	readShapesInfo(sn , mapFile);
 	ignoreCommentLines(mapFile);
 	fclose(mapFile);
+	printMapInfo();
 	return true;
 }
 
@@ -140,6 +136,31 @@ void Map::closeTMF(FILE* file)
 {
 	fprintf(file , "eotmf");
 	fclose(file);
+}
+
+void Map::printMapInfo(void)
+{
+	printf("This map version is : %f.\n" , V);
+	printf("Map name is %s\n" , mapName);
+	printf("Creator's comment is : \n\t%s\n" , comment);
+	printf("Map type is ");
+	switch (mapType)
+	{
+	case goal:
+		printf("%s.\n" , "goal");
+		break;
+	case unlimited:
+		printf("%s.\n" , "unlimited");
+		break;
+	case CTF:
+		printf("%s.\n" , "CTF");
+		break;
+	default:
+		break;
+	}
+	printf("Player limit or number is %d.\n" , np);
+	printf("Default COF is %f.\n" , COF);
+	printf("Number of shapes in the map is %d.\n" , (int)shapes.size());
 }
 
 void Map::putComment(FILE* file , char* cm)
