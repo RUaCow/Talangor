@@ -11,16 +11,17 @@ TMDManager::TMDManager(void)
 	if(mode == 1)
 	{
 		printf("Please enter the file path:\n");
-		char* filePath = "";
-		scanf("%s" , &filePath);
+		char* filePath = new char[1000];
+		scanf("%s" , filePath);
 		map = new Map(filePath);
 	}
 	else if(mode == 2)
 	{
 		printf("Please select your map type:\n0 :\tGoal\n1 :\tUnlimited\n2 :\tCTF\n");
 		int mapType;
-		scanf("%d%" , &mapType);
+		scanf("%d" , &mapType);
 		map = new Map(0.1f , (MapType)mapType);
+		map->saveMap();
 	}
 }
 

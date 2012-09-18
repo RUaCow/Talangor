@@ -21,7 +21,7 @@ enum MapType
 
 class Map
 {
-	friend class Designer;
+	friend class TMDManager;
 	//The version that the map was creted for.
 	float V;
 	//The name of the map.
@@ -74,7 +74,7 @@ public:
 	//This will load a map to change it.
 	Map(char* filePath);
 	//For a completely new map.
-	Map(float version , MapType type , float defCOF = -1 , char* filePath = DEFAULT_PATH , char* mapName = "untitled" , int np = -1);
+	Map(float version , MapType type , float defCOF = -1 , char* filePath = DEFAULT_PATH , char* name = "untitled" , int np = -1);
 
 	//Get map type.
 	const MapType getMapType(void) const;

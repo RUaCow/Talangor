@@ -3,27 +3,44 @@
 #include <stdio.h>
 
 
-Map::Map(char* filePath) : path(filePath) , changesSaved(true)
+Map::Map(char* filePath) : changesSaved(true)
 {
+	path = new char[1000];
+	mapName = new char[100];
+	comment = new char[2000];
+	strcpy(path , filePath);
 	loadMap();
 }
 
-Map::Map(float version , MapType type , float defCOF , char* filePath , char* mapName , int np) : V(version) , mapType(type) , COF(defCOF) , mapName(mapName) , np(np) , path(filePath) , changesSaved(false)
+Map::Map(float version , MapType type , float defCOF , char* filePath , char* name , int np) : V(version) , mapType(type) , COF(defCOF) , np(np) , changesSaved(false)
 {
-	//:D nothing here ...
+	path = new char[1000];
+	mapName = new char[100];
+	comment = new char[2000];
+	strcpy(mapName , name);
+	strcpy(path , filePath);
+	comment = NULL;
 }
 
 bool Map::loadMap(void)
 {
-	FILE* mapFile = fopen(path , "r");
+	FILE* mapFile = fopen(path , "rb");
+	int a = ftell(mapFile);
 	//Loading ...
 	ignoreCommentLines(mapFile);
+	a = ftell(mapFile);
+	//Version.
+	fscanf(mapFile , "%f\n" , &V);
+	ignoreCommentLines(mapFile);
+	a = ftell(mapFile);
 	//Map name.
-	fscanf(mapFile , "%s\n" , &mapName);
+	fgets(mapName , 100 , mapFile);
 	ignoreCommentLines(mapFile);
+	a = ftell(mapFile);
 	//Creator's comment.
-	fscanf(mapFile , "%s\n" , &comment);
+	fgets(comment , 1000 , mapFile);
 	ignoreCommentLines(mapFile);
+	a = ftell(mapFile);
 	//Map type.
 	fscanf(mapFile , "%d\n" , (int*)&mapType);
 	ignoreCommentLines(mapFile);
@@ -47,12 +64,14 @@ bool Map::loadMap(void)
 bool Map::saveMap(void)
 {
 	//Check if comment is initialized.
-	!comment ? strcpy(comment , "") : comment;
+	!comment ? (comment = new char , strcpy(comment , "No Comment")) : (comment);
 	//Check the path.
-	char* fileName = path == DEFAULT_PATH ? mapName : path;
+	char* fileName = (strcmp(path , DEFAULT_PATH) == 0 ? mapName : path);
 	FILE* mapFile = fopen(fileName , "w");
 	//Saving ...
 	putComment(mapFile , "Map created by Talangor Map Designer , cretaed by RUaCow team.\n");
+	//Version.
+	fprintf(mapFile , "%f\n" , V);
 	//Map name.
 	fprintf(mapFile , "%s\n" , mapName);
 	//Creator's comment
@@ -111,6 +130,8 @@ void Map::readShapesInfo(int n , FILE* file , vector<Shape>* shs)
 		Shape sh(i , points , sCOF);
 		//Adding the shapes.
 		shs->push_back(sh);
+		//Reading shapes inside this shape.
+		ignoreCommentLines(file);
 		readShapesInfo(sn , file , &shs->at(i).shapes);
 	}
 }
@@ -123,7 +144,7 @@ void Map::closeTMF(FILE* file)
 
 void Map::putComment(FILE* file , char* cm)
 {
-	fprintf(file , "%s%s\n" , "@" , cm);
+	fprintf(file , "%s%s" , "@" , cm);
 }
 
 void Map::ignoreCommentLines(FILE* file)
@@ -131,7 +152,7 @@ void Map::ignoreCommentLines(FILE* file)
 	char buf[256];
 	bool ignoring = true;
 	while(ignoring)
-		fgetc(file) == '@' ? fgets(buf , 256 , file) , ignoring = true : fseek(file , -1 , SEEK_CUR) , ignoring = false;
+		fgetc(file) == '@' ? (fgets(buf , 256 , file) , printf("Comment ignored : %s\n" , buf)) : (ignoring = false , fseek(file , ftell(file) - 1 , SEEK_SET));
 }
 
 void Map::addShape(Shape new_shape)
