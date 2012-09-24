@@ -25,6 +25,16 @@ void Shape::addShape(vector<Vector2Df> spoints , float sCOF)
 	shapes.push_back(Shape((int)shapes.size() , spoints , sCOF));
 }
 
+const vector<Vector2Df> Shape::getPoints(void) const
+{
+	return points;
+}
+
+const vector<Shape> Shape::getInsideShapes(void) const
+{
+	return shapes;
+}
+
 Shape& Shape::operator=(Shape const& s){
 	return (Shape&)s;
 }

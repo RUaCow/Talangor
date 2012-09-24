@@ -225,3 +225,8 @@ const float Map::getMapVersion(void) const
 {
 	return V;
 }
+
+const vector<Shape> Map::getMapShapes(void) const
+{
+	return shapes;
+}

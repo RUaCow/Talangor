@@ -86,6 +86,9 @@ public:
 
 	//Get map version.
 	const float getMapVersion(void) const;
+
+	//Get map shapes for drawing.
+	const std::vector<Shape> getMapShapes(void) const;
 };
 
 #endif

@@ -23,6 +23,8 @@ TMDManager::TMDManager(void)
 		map = new Map(0.1f , (MapType)mapType);
 		map->saveMap();
 	}
+	gui = new SDL_GUI;
+	gui->drawMap(*map);
 }
 
 TMDManager::~TMDManager(void)
